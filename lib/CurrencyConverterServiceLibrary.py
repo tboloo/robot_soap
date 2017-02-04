@@ -1,4 +1,5 @@
 from zeep import Client
+import sys
 
 class CurrencyConverterServiceLibrary(object):
 	"""Library for wrapping calls to http://www.webservicex.net/ currency converter service"""
@@ -9,6 +10,7 @@ class CurrencyConverterServiceLibrary(object):
 		self.result = ''
 
 	def get_conversion_rate(self, fromCurrency, toCurrency):
+		"""Gets the conversion rate for the pair of currencies"""
 		try:
 			self.result = self.client.service.ConversionRate(fromCurrency, toCurrency)
 		except Exception as e:
@@ -23,3 +25,6 @@ class CurrencyConverterServiceLibrary(object):
         """
 		if self.result != expected:
 			raise AssertionError('%s != %s' % (self.result, expected))
+
+	def get_available_currencies(self):
+		raise NotImplementedError(sys._getframe().f_code.co_name)
