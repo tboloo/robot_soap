@@ -11,22 +11,37 @@ Documentation     Example test cases using the data-driven testing approach.
 ...               same workflow needs to repeated multiple times, it is best
 ...               to use to the _data-driven_ approach.
 Library           ../lib/CustomerServiceLibrary.py
-Library         OperatingSystem
+Metadata          Version    0.1
+
+*** Variables ***
+${N}   10
+
 *** Test Cases ***
 Create new customer
     As an operator
     I can create new customer
 
+Create N new customers
+    As an operator
+    I can create "${N}" new customers
+
 Get existing customer
+    As an operator
     I can get existing customer "1"
 
 *** Keywords ***
 As an operator
-    Pass Execution  Stub method
+    No operation
 
 I can create new customer
-    ${result} =  Create customer
-    Should Be Empty ${result}
+    ${result} =  Create customer    1
+    Should Be Equal     ${result}   ok
+
+I can create "${N}" new customers
+    : FOR    ${i}    IN RANGE    1    ${N}
+    \   Log to console      Creating customer ${i}
+    \   ${result} =         Create customer    ${i}
+    \   Should Be Equal     ${result}   ok
 
 I can get existing customer "${id}"
     ${customer} =   Get Customer    ${id}

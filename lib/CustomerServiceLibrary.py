@@ -8,14 +8,18 @@ class CustomerServiceLibrary(object):
 		self.wsdl = 'http://www.predic8.com:8080/crm/CustomerService?wsdl'
 		self.client = Client(self.wsdl)
 		self.factory = self.client.type_factory('ns2')
+		self.factory_ns1 = self.client.type_factory('ns1')
 
-	def create_customer(self):
+	def create_customer(self, id):
 		"""Creates new customer"""
 		address = self.factory.AddressType('5th Avenue','New York', '90210','USA')
 		person = self.factory.PersonType(1,'John', 'Doe', address, 39)
-		customer = self.factory.CustomerType(person,address,1)
+		customer = self.factory_ns1.CustomerType(person,address,id)
 		result = self.client.service.create(customer)
-		return result
+		if result is None:
+			return 'ok'
+		else:
+			return result
 
 	def get_customer(self, id):
 		"""Gets customer by id"""
