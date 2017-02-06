@@ -13,10 +13,10 @@ Documentation     Example test cases using the keyword-driven testing approach.
 Library           ../lib/CurrencyConverterServiceLibrary.py
 
 *** Test Cases ***
-Get conversion rate for USD and PLN
+Scenario: Get conversion rate for USD and PLN
     Get conversion rate    USD  PLN
     Result should be    4.0025
 
-Get available currencies
+Scenario: Get available currencies
     ${currencies} =   Get available currencies
     Should Contain ${currencies}   "NotImplementedError"

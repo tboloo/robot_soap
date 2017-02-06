@@ -17,15 +17,15 @@ Metadata          Version    0.1
 ${N}   10
 
 *** Test Cases ***
-Create new customer
+Scenario: Create new customer
     As an operator
     I can create new customer
 
-Create N new customers
+Scenario: Create N new customers
     As an operator
     I can create "${N}" new customers
 
-Get existing customer
+Scenario: Get existing customer
     As an operator
     I can get existing customer "1"
 
